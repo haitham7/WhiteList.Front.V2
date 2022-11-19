@@ -6,13 +6,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ColorPickerService } from 'ngx-color-picker';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './core/services/auth.interceptor';
+import { AuthGuard } from './core/guard/auth.guard';
+import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/services/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,8 +34,34 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireDatabaseModule,
     SimpleNotificationsModule.forRoot(),
     ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule,
+    NgxSpinnerModule,
   ],
-  providers: [ColorPickerService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    AuthGuard,
+    ColorPickerService,
+    {
+      provide: HIGHLIGHT_OPTIONS, // https://www.npmjs.com/package/ngx-highlightjs
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          xml: () => import('highlight.js/lib/languages/xml'),
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          scss: () => import('highlight.js/lib/languages/scss'),
+        },
+      },
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
