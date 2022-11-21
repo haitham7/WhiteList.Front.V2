@@ -1,10 +1,10 @@
 import { AuthenticationModule } from './views/pages/authentication/authentication.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForgetPasswordComponent } from './views/auth/forget-password/forget-password.component';
-import { LoginComponent } from './views/auth/login/login.component';
-import { ResisterComponent } from './views/auth/resister/resister.component';
-import { VerifyEmailComponent } from './views/auth/verify-email/verify-email.component';
+import { ForgetPasswordComponent } from './views/pages/auth/forget-password/forget-password.component';
+import { LoginComponent } from './views/pages/auth/login/login.component';
+import { ResisterComponent } from './views/pages/auth/resister/resister.component';
+import { VerifyEmailComponent } from './views/pages/auth/verify-email/verify-email.component';
 import { AdminGuard } from './views/shared/guard/admin.guard';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ContentLayoutComponent } from './views/shared/layout-components/layout/content-layout/content-layout.component';
@@ -58,7 +58,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule),
+    loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: '',

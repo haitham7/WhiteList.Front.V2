@@ -9,7 +9,8 @@ import { Menu, NavService } from '../../services/nav.service';
 import { switcherArrowFn, parentNavActive, checkHoriMenu } from './sidebar';
 import { fromEvent } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-
+import { MENU } from './menu';
+import { MenuItem } from './menu.model';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -17,7 +18,9 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent {
-  public menuItems!: Menu[];
+  //public menuItems!: Menu[];
+  menuItems: MenuItem[] = [];
+
   public url: any;
   public routerSubscription: any;
   public windowSubscribe$!:any;
@@ -170,6 +173,8 @@ export class SidebarComponent {
     });
   }
   ngOnInit(): void {
+    this.menuItems = MENU;
+    console.log(this.menuItems);
     switcherArrowFn();
     // detect screen size changes
     this.breakpointObserver

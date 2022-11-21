@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../shared/services/firebase/auth.service';
+import { AuthService } from '../../../shared/services/firebase/auth.service';
 
 @Component({
   selector: 'app-resister',
