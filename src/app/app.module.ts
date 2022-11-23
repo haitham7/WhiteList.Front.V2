@@ -1,6 +1,10 @@
+import { AddMininstryComponent } from './views/pages/ministries/addMinistry.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table'  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,10 +23,16 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/services/loading.interceptor';
+import { MinistriesComponent } from './views/pages/ministries/ministries.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MinistriesComponent,
+    AddMininstryComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +46,9 @@ import { LoadingInterceptor } from './core/services/loading.interceptor';
     ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule,
     NgxSpinnerModule,
+    MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule,
+    FormsModule,ReactiveFormsModule
+
   ],
   providers: [
     {

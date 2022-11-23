@@ -1,11 +1,5 @@
-import { AuthenticationModule } from './views/pages/authentication/authentication.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForgetPasswordComponent } from './views/pages/auth/forget-password/forget-password.component';
-import { LoginComponent } from './views/pages/auth/login/login.component';
-import { ResisterComponent } from './views/pages/auth/resister/resister.component';
-import { VerifyEmailComponent } from './views/pages/auth/verify-email/verify-email.component';
-import { AdminGuard } from './views/shared/guard/admin.guard';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ContentLayoutComponent } from './views/shared/layout-components/layout/content-layout/content-layout.component';
 import { ErrorLayoutComponent } from './views/shared/layout-components/layout/error-layout/error-layout.component';
@@ -17,7 +11,6 @@ import { errorRoute } from './views/shared/routes/error.routes';
 import { LandingPage } from './views/shared/routes/landingpage';
 import { content } from './views/shared/routes/routes copy';
 import { switcher } from './views/shared/routes/switchers';
-import { SharedModule } from './views/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -59,6 +52,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./views/pages/ministries/ministries.module').then(m => m.MinistriesModule),
   },
   {
     path: '',

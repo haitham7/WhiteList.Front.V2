@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signout(){
-    this.auth.SignOut();
+    localStorage.clear();
     this.router.navigate(['/auth/login'])
   }
   

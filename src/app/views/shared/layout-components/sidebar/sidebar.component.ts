@@ -174,7 +174,6 @@ export class SidebarComponent {
   }
   ngOnInit(): void {
     this.menuItems = MENU;
-    console.log(this.menuItems);
     switcherArrowFn();
     // detect screen size changes
     this.breakpointObserver
