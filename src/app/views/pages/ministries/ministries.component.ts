@@ -43,23 +43,21 @@ export class MinistriesComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllMinistries();
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
+
   openDialog(action:any,obj:any) {
     obj.action = action;
-    console.log(obj.name);
-    const dialogRef = this.dialog.open(MinistryDialogBoxComponent, {
-      width: '28%',
+    this.dialog.open(MinistryDialogBoxComponent, {
+      width: '40%',
       data:obj
     });
-
   }
+
   getAllMinistries(){
     this.ministriesService.getAllMinistries().subscribe((res: any) => {   
-      this.dataSource = new MatTableDataSource(res.data)
+      this.dataSource = new MatTableDataSource(res.data);
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-
     }, (err: any) =>{
       console.log(err.message);
     });
