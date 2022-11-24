@@ -6,12 +6,15 @@
                 <h1 class="card-title mb-0">الوزارات</h1>
             </div>
             <div class="card-body">
-                <button class="btn btn-outline-primary border float-end"  (click)="openDialog('Add',{})">اضافة وزارة جديدة</button>
-                <div class="d-flex justify-content-start">     
-                    <mat-form-field appearance="standard" class="mat-typography text-start">
-                        <mat-label>فلتر</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="اكتب" #input>
+                <div class="d-flex justify-content-between">     
+                    <mat-form-field appearance="standard" class="mat-typography text-start float-start">
+                        <mat-label>ابحث هنا...</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="اسم الوزارة" #input>
                     </mat-form-field>    
+                    <div class="mt-5">
+                        <button class="btn btn-outline-primary border float-end "  (click)="openDialog('Add',{})">اضافة وزارة جديدة</button>
+                    </div>
+
                 </div>
                 <div class="table-responsive">
                     <table class="table text-nowrap mb-0 table-bordered" mat-table [dataSource]="dataSource" matSort>
@@ -32,9 +35,10 @@
                         <td mat-cell *matCellDef="let row">
                             <div class="d-flex align-items-stretch">
                                 <button class="btn btn-sm btn-outline-primary border me-2" (click)="openDialog('Update',row)">
-                                    <i class="fe fe-edit-2"></i>
+                                    تعديل<i class="fe fe-edit-2 ms-2"></i>
                                 </button>
                                 <button (click)="openDialog('Delete',row)" class="btn btn-sm btn-outline-secondary border me-2">
+                                    حذف
                                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="16">
                                         <path d="M0 0h24v24H0V0z" fill="none" />
                                         <path
