@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import {  MatInputModule  } from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog'
+import {MatDialogModule} from '@angular/material/dialog';
+import { MinistryDialogBoxComponent } from './ministry-dialog-box/ministry-dialog-box.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,9 @@ import {MatDialogModule} from '@angular/material/dialog'
     MatDialogModule ,
     FormsModule, ReactiveFormsModule,
     NgbModule
+  ],
+  declarations: [
+    MinistryDialogBoxComponent
   ]
 })
 export class MinistriesModule { }

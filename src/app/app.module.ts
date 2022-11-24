@@ -1,4 +1,3 @@
-import { AddMininstryComponent } from './views/pages/ministries/addMinistry.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -27,12 +26,13 @@ import { MinistriesComponent } from './views/pages/ministries/ministries.compone
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginator } from './core/help/customRTLPaginator';
 @NgModule({
   declarations: [
     AppComponent,
     MinistriesComponent,
-    AddMininstryComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -51,6 +51,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   ],
   providers: [
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
