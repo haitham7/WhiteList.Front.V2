@@ -22,7 +22,6 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/services/loading.interceptor';
-import { MinistriesComponent } from './views/pages/ministries/ministries.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +30,6 @@ import { CustomPaginator } from './core/help/customRTLPaginator';
 @NgModule({
   declarations: [
     AppComponent,
-    MinistriesComponent,
     
   ],
   imports: [

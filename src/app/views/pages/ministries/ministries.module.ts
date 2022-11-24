@@ -1,3 +1,4 @@
+import { MinistriesComponent } from './ministries.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
@@ -20,7 +21,9 @@ import { MinistryDialogBoxComponent } from './ministry-dialog-box/ministry-dialo
     NgbModule
   ],
   declarations: [
-    MinistryDialogBoxComponent
-  ]
+    MinistryDialogBoxComponent,
+    MinistriesComponent
+  ],
+  
 })
 export class MinistriesModule { }
