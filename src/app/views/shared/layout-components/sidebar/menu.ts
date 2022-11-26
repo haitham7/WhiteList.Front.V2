@@ -31,7 +31,7 @@ export const MENU: MenuItem[] = [
   {
     title: 'الدوائر',
     icon: 'circle',
-    path: '/Directorate/all',
+    path: '/Directorates/all',
     type: 'link'
   },
   {

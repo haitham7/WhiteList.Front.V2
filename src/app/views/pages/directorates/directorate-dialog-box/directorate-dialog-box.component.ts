@@ -1,51 +1,53 @@
 import { Component, Inject, Optional, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {MinistriesService} from '../../../../core/services/api/ministries.service';
-import {MinistriesComponent} from '../ministries.component';
+import { DirectoratesService } from '../../../../core/services/api/directorates.service';
+import {DirectorateComponent} from '../directorates.component';
 declare var require: any;
 const Swal = require('sweetalert2');
 
-export interface ministryData {
+export interface directorateData {
   name: string;
   id: number;
 }
 
 @Component({
-  selector: 'app-ministry-dialog-box',
-  templateUrl: './ministry-dialog-box.component.html',
+  selector: 'app-directorate-dialog-box',
+  templateUrl: './directorate-dialog-box.component.html',
 })
-export class MinistryDialogBoxComponent implements OnInit {
+export class DirectorateDialogBoxComponent implements OnInit {
   action:string;
-  ministry:any;
+  directorate:any;
   public modelForm: FormGroup | any;
-  @ViewChild("component1") component1: MinistriesComponent;
+  @ViewChild("component1") component1: DirectorateComponent;
 
   constructor(
-    public dialogRef: MatDialogRef<MinistryDialogBoxComponent>,
-    private ministriesService:MinistriesService,
+    public dialogRef: MatDialogRef<DirectorateDialogBoxComponent>,
+    private directorateService:DirectoratesService,
     private fb: FormBuilder,
     //@Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: ministryData) {
-    this.ministry = {...data};
-    this.action = this.ministry.action;
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: directorateData) {
+    this.directorate = {...data};
+    this.action = this.directorate.action;
     this.modelForm = this.fb.group({
       name: ['', [Validators.required]],
+      ministryId:['', [Validators.required]],
     });
   }
 
   
-  addMinistry(){
+  addDirectorate(){
     if(this.modelForm.status=="INVALID"){
       return;
     }
-    this.ministriesService.addNewMinistry(this.modelForm.value).subscribe((res: any) => {
+    this.directorateService.addNewDirectorate(this.modelForm.value).subscribe((res: any) => {
       Swal.fire({
         title: 'تمت الاضافة',
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      console.log(res);
+      this.component1.getAllDirectorates(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
@@ -56,17 +58,17 @@ export class MinistryDialogBoxComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updateMinistry(id:any){
+  updateDirectorate(id:any){
     if(this.modelForm.status=="INVALID"){
       return;
     }
-    this.ministriesService.updateMinistry(id,this.modelForm.value).subscribe((res: any) => {
+    this.directorateService.updateDirectorate(id,this.modelForm.value).subscribe((res: any) => {
       Swal.fire({
         title: 'تم التعديل',
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      this.component1.getAllDirectorates(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
@@ -77,14 +79,14 @@ export class MinistryDialogBoxComponent implements OnInit {
     this.dialogRef.close();
   }
   
-  deleteMinistry(id){
-    this.ministriesService.deleteMinistry(id).subscribe((res: any) => {
+  deleteDirectorate(id){
+    this.directorateService.deleteDirectorate(id).subscribe((res: any) => {
       Swal.fire({
         title: 'تم الحذف',
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      this.component1.getAllDirectorates(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',

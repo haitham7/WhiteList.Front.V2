@@ -59,6 +59,10 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('./views/pages/directorates/directorates.module').then(m => m.DirectoratesModule),
+  },
+  {
+    path: '',
     loadChildren: () => import('./views/pages/authentication/authentication.module').then(m => m.AuthenticationModule),
   },
   {

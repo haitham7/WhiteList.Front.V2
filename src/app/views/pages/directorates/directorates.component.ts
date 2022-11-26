@@ -1,37 +1,38 @@
-import { MinistryDialogBoxComponent } from './ministry-dialog-box/ministry-dialog-box.component'
+import { DirectoratesService } from './../../../core/services/api/directorates.service';
+import { DirectorateDialogBoxComponent } from './directorate-dialog-box/directorate-dialog-box.component'
 import { Component, OnInit , ViewChild } from '@angular/core';
 
 import {MatPaginator,MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {MinistriesService} from '../../../core/services/api/ministries.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { CustomPaginator } from '../../../core/help/customRTLPaginator';
 declare var require: any;
 const Swal = require('sweetalert2');
 
-export interface ministries{
+export interface directorates{
   id:number,
   name:string,
+  ministry:string
 };
 
 @Component({
-  selector: 'app-ministries',
-  templateUrl: './ministries.component.html',
-  styleUrls: ['./ministries.component.scss'],
+  selector: 'app-directorates',
+  templateUrl: './directorates.component.html',
+  styleUrls: ['./directorates.component.scss'],
   providers: [
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }  // Here
   ]
 })
-export class MinistriesComponent implements OnInit {
+export class DirectorateComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['name','Action'];
+  displayedColumns: string[] = ['name','ministry','Action'];
   // Assign the data to the data source for the table to render
-  dataSource = new MatTableDataSource<ministries>();
+  dataSource = new MatTableDataSource<directorates>();
 
-  constructor(private ministriesService:MinistriesService,public dialog: MatDialog) { }
+  constructor(private directorateService:DirectoratesService,public dialog: MatDialog) { }
  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -42,20 +43,21 @@ export class MinistriesComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.getAllMinistries();
+    this.getAllDirectorates(1);
   }
 
   openDialog(action:any,obj:any) {
     obj.action = action;
-    this.dialog.open(MinistryDialogBoxComponent, {
+    this.dialog.open(DirectorateDialogBoxComponent, {
       width: '40%',
       data:obj
     });
   }
 
-  getAllMinistries(){
-    this.ministriesService.getAllMinistries().subscribe((res: any) => {   
-      this.dataSource.data = res.data;
+  getAllDirectorates(pageNum){
+    this.directorateService.getAllDirectorates(pageNum).subscribe((res: any) => {   
+      console.log(res);
+      this.dataSource.data = res.data.values;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     }, (err: any) =>{

@@ -4,16 +4,16 @@
     <div class="col-12 col-sm-12">
         <div class="card product-sales-main">
             <div class="card-header border-bottom">
-                <h1 class="card-title mb-0">الوزارات</h1>
+                <h1 class="card-title mb-0">الدوائر</h1>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-between">     
                     <mat-form-field appearance="standard" class="mat-typography text-start float-start">
                         <mat-label>ابحث هنا...</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="اسم الوزارة" #input>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="اسم الدائرة" #input>
                     </mat-form-field>    
                     <div class="mt-5">
-                        <button class="btn btn-outline-primary border float-end "  (click)="openDialog('Add',{})">اضافة وزارة جديدة</button>
+                        <button class="btn btn-outline-primary border float-end "  (click)="openDialog('Add',{})">اضافة دائرة جديدة</button>
                     </div>
 
                 </div>
@@ -21,11 +21,22 @@
                     <table class="table text-nowrap mb-0 table-bordered" mat-table [dataSource]="dataSource" matSort>
 
                     <ng-container matColumnDef="name">
-                        <th class="text-start" mat-header-cell *matHeaderCellDef mat-sort-header myTable> الوزارة </th>
+                        <th class="text-start" mat-header-cell *matHeaderCellDef mat-sort-header myTable> الدائرة </th>
                         <td mat-cell *matCellDef="let row" class="sorting_1">
                             <div class="d-flex align-items-center">
                                 <div class="user-details ms-2">
                                     <h6 class="mb-0">{{row.name}}</h6>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ministry">
+                        <th class="text-start" mat-header-cell *matHeaderCellDef mat-sort-header myTable> الوزارة </th>
+                        <td mat-cell *matCellDef="let row" class="sorting_1">
+                            <div class="d-flex align-items-center">
+                                <div class="user-details ms-2">
+                                    <h6 class="mb-0">{{row.ministry.name}}</h6>
                                 </div>
                             </div>
                         </td>
@@ -55,7 +66,7 @@
 
                     <!-- Row shown when there is no matching data. -->
                     <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        <td class="mat-cell text-center" colspan="4">لا توجد بيانات </td>
                     </tr>
                 </table>
                 <mat-paginator dir="rtl" class="text-start" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

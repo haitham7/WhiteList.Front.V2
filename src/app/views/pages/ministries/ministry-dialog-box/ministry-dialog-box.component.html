@@ -1,3 +1,4 @@
+<app-ministries #component1 hidden></app-ministries>
 <form [formGroup]="modelForm">
     <div mat-dialog-title>
         <span *ngIf="action == 'Add'">اضافة وزارة جديدة</span>
@@ -20,7 +21,7 @@
         <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
             color="warn">الغاء</button>
         <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
-            (click)="addMinistry()">اضافة</button>
+          (click)="addMinistry()">اضافة</button>
         <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
             (click)="updateMinistry(ministry.id)">تعديل</button>
         <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"

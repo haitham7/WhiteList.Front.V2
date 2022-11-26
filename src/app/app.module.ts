@@ -4,7 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table'  
-
+import { MatSelectModule } from '@angular/material/select'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,7 +45,8 @@ import { CustomPaginator } from './core/help/customRTLPaginator';
     HttpClientModule,
     NgxSpinnerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,ReactiveFormsModule,
+    MatSelectModule
 
   ],
   providers: [
