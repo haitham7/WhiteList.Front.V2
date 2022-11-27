@@ -18,6 +18,7 @@ export interface directorateData {
 })
 export class DirectorateDialogBoxComponent implements OnInit {
   action:string;
+  ministryOfDirectorate:any =1;
   directorate:any;
   ministries: any;
   public modelForm: FormGroup | any;
@@ -32,6 +33,9 @@ export class DirectorateDialogBoxComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: directorateData) {
     this.directorate = {...data};
     this.action = this.directorate.action;
+    if(this.directorate.ministry){
+      this.ministryOfDirectorate= this.directorate.ministry.id
+    }
     this.modelForm = this.fb.group({
       name: ['', [Validators.required]],
       ministryId:['', [Validators.required]],

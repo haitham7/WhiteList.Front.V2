@@ -9,9 +9,9 @@
     <div mat-dialog-content>
         <div class="row mt-4" *ngIf="action != 'Delete'; else elseTemplate">
             <div class="col-6">
-                <mat-form-field class="text-start w-100">
+                <mat-form-field class="text-start w-100" >
                     <mat-label>اختر الوزارة</mat-label>
-                    <mat-select formControlName="ministryId" [(ngModel)]="directorate.ministry.id">
+                    <mat-select formControlName="ministryId"  [(ngModel)]="ministryOfDirectorate">
                         <mat-option *ngFor="let card of ministries" class="text-start" [value]="card.id">{{card.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
