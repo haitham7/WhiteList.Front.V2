@@ -7,19 +7,17 @@
     </div>
     <hr />
     <div mat-dialog-content>
-        <div class="row mt-4">
+        <div class="row mt-4" *ngIf="action != 'Delete'; else elseTemplate">
             <div class="col-6">
                 <mat-form-field class="text-start w-100">
                     <mat-label>اختر الوزارة</mat-label>
                     <mat-select formControlName="ministryId">
-                        <mat-option class="text-start" value="1"> وزارة الصحة </mat-option>
-                        <mat-option class="text-start" value="2" disabled>وزارة التجارة</mat-option>
-                        <mat-option class="text-start" value="3">وزارة الدفاع</mat-option>
+                        <mat-option *ngFor="let card of ministries" class="text-start" value="{{card.id}}">{{card.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-6">
-                <mat-form-field class="text-start w-100" *ngIf="action != 'Delete'; else elseTemplate">
+                <mat-form-field class="text-start w-100">
                     <input placeholder="ادخل الاسم" matInput formControlName="name" [(ngModel)]="directorate.name">
                 </mat-form-field>
             </div>

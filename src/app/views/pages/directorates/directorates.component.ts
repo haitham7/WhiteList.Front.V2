@@ -1,13 +1,11 @@
 import { DirectoratesService } from './../../../core/services/api/directorates.service';
 import { DirectorateDialogBoxComponent } from './directorate-dialog-box/directorate-dialog-box.component'
 import { Component, OnInit , ViewChild } from '@angular/core';
-
 import {MatPaginator,MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-import { MatDialog } from '@angular/material/dialog';
 import { CustomPaginator } from '../../../core/help/customRTLPaginator';
+import { MatDialog } from '@angular/material/dialog';
 declare var require: any;
 const Swal = require('sweetalert2');
 
@@ -31,7 +29,9 @@ export class DirectorateComponent implements OnInit {
   displayedColumns: string[] = ['name','ministry','Action'];
   // Assign the data to the data source for the table to render
   dataSource = new MatTableDataSource<directorates>();
-
+  pageSize=0;
+  length=0;
+  public currentPage = 0;
   constructor(private directorateService:DirectoratesService,public dialog: MatDialog) { }
  
   applyFilter(event: Event) {
@@ -53,13 +53,20 @@ export class DirectorateComponent implements OnInit {
       data:obj
     });
   }
+  public handlePage(e: any) {
+    console.log(e);
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    CustomPaginator().getRangeLabel(e.pageIndex,e.pageSize,e.length);
+    this.getAllDirectorates(this.currentPage+1)
+  }
 
   getAllDirectorates(pageNum){
     this.directorateService.getAllDirectorates(pageNum).subscribe((res: any) => {   
-      console.log(res);
       this.dataSource.data = res.data.values;
       this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+       this.pageSize= res.data.pageSize;
+       this.length=res.data.totalCount
     }, (err: any) =>{
       console.log(err.message);
     });

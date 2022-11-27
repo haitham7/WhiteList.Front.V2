@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DirectoratesService } from '../../../../core/services/api/directorates.service';
 import {DirectorateComponent} from '../directorates.component';
+import { MinistriesService } from '../../../../core/services/api/ministries.service';
 declare var require: any;
 const Swal = require('sweetalert2');
 
@@ -18,12 +19,14 @@ export interface directorateData {
 export class DirectorateDialogBoxComponent implements OnInit {
   action:string;
   directorate:any;
+  ministries: any;
   public modelForm: FormGroup | any;
   @ViewChild("component1") component1: DirectorateComponent;
 
   constructor(
     public dialogRef: MatDialogRef<DirectorateDialogBoxComponent>,
     private directorateService:DirectoratesService,
+    private ministriesService:MinistriesService,
     private fb: FormBuilder,
     //@Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: directorateData) {
@@ -35,7 +38,14 @@ export class DirectorateDialogBoxComponent implements OnInit {
     });
   }
 
-  
+  getAllMinistries(){
+    this.ministriesService.getAllMinistries().subscribe((res: any) => {   
+      this.ministries = res.data;
+    }, (err: any) =>{
+      console.log(err.message);
+    });
+  } 
+
   addDirectorate(){
     if(this.modelForm.status=="INVALID"){
       return;
@@ -46,7 +56,6 @@ export class DirectorateDialogBoxComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false,
       });
-      console.log(res);
       this.component1.getAllDirectorates(1);
     }, (err: any) =>{
       Swal.fire({
@@ -102,7 +111,7 @@ export class DirectorateDialogBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.component1);
+    this.getAllMinistries()
   }
 
 }

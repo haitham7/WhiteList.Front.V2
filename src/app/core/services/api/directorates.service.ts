@@ -17,11 +17,11 @@ export class DirectoratesService {
   }
 
   deleteDirectorate(id:any){
-    return this.http.delete(this.baseUrl + 'api/Directorate/Delete/'+ id).pipe();
+    return this.http.delete(this.baseUrl + '/api/Directorate/Delete/'+ id).pipe();
   }
 
   updateDirectorate(id:any,body:any) {
-    return this.http.put(this.baseUrl + 'api/Directorate/Update/'+ id ,body).pipe();
+    return this.http.put(this.baseUrl + '/api/Directorate/Update?id='+ id ,body).pipe();
   }
   
 }
