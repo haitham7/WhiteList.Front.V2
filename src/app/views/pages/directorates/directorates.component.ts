@@ -54,11 +54,10 @@ export class DirectorateComponent implements OnInit {
     });
   }
   public handlePage(e: any) {
-    console.log(e);
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
-    CustomPaginator().getRangeLabel(e.pageIndex,e.pageSize,e.length);
     this.getAllDirectorates(this.currentPage+1)
+    CustomPaginator().getRangeLabel(e.pageIndex,e.pageSize,e.length);
   }
 
   getAllDirectorates(pageNum){

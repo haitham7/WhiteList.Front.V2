@@ -11,8 +11,8 @@
             <div class="col-6">
                 <mat-form-field class="text-start w-100">
                     <mat-label>اختر الوزارة</mat-label>
-                    <mat-select formControlName="ministryId">
-                        <mat-option *ngFor="let card of ministries" class="text-start" value="{{card.id}}">{{card.name}}</mat-option>
+                    <mat-select formControlName="ministryId" [(ngModel)]="directorate.ministry.id">
+                        <mat-option *ngFor="let card of ministries" class="text-start" [value]="card.id">{{card.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

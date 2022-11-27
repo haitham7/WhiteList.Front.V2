@@ -13,6 +13,10 @@ export class MinistriesService {
     return this.http.get(this.baseUrl + '/api/Ministry/GetMinistries').pipe();
   }
 
+  getAllMinistriesByPageNum(pageNum) {
+    return this.http.get(this.baseUrl + '/api/Ministry/All/'+pageNum).pipe();
+  }
+
   addNewMinistry(body:any) {
     return this.http.post(this.baseUrl + '/api/Ministry/Create',body).pipe();
   }

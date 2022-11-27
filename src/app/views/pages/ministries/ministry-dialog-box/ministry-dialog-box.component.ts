@@ -45,7 +45,7 @@ export class MinistryDialogBoxComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      this.component1.getAllMinistries(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
@@ -66,7 +66,7 @@ export class MinistryDialogBoxComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      this.component1.getAllMinistries(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
@@ -84,7 +84,7 @@ export class MinistryDialogBoxComponent implements OnInit {
         timer: 1000,
         showConfirmButton: false,
       });
-      this.component1.getAllMinistries();
+      this.component1.getAllMinistries(1);
     }, (err: any) =>{
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',

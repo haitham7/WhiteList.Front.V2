@@ -30,7 +30,9 @@ export class MinistriesComponent implements OnInit {
   displayedColumns: string[] = ['name','Action'];
   // Assign the data to the data source for the table to render
   dataSource = new MatTableDataSource<ministries>();
-
+  pageSize=0;
+  length=0;
+  public currentPage = 0;
   constructor(private ministriesService:MinistriesService,public dialog: MatDialog) { }
  
   applyFilter(event: Event) {
@@ -42,7 +44,7 @@ export class MinistriesComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.getAllMinistries();
+    this.getAllMinistries(1);
   }
 
   openDialog(action:any,obj:any) {
@@ -52,12 +54,19 @@ export class MinistriesComponent implements OnInit {
       data:obj
     });
   }
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.getAllMinistries(this.currentPage+1)
+    CustomPaginator().getRangeLabel(e.pageIndex,e.pageSize,e.length);
+  }
 
-  getAllMinistries(){
-    this.ministriesService.getAllMinistries().subscribe((res: any) => {   
-      this.dataSource.data = res.data;
+  getAllMinistries(pageNum){
+    this.ministriesService.getAllMinistriesByPageNum(pageNum).subscribe((res: any) => {   
+      this.dataSource.data = res.data.values;
       this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.pageSize= res.data.pageSize;
+      this.length=res.data.totalCount
     }, (err: any) =>{
       console.log(err.message);
     });
