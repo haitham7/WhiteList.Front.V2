@@ -65,6 +65,7 @@ export class DirectorateDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       });    
     });
@@ -86,6 +87,7 @@ export class DirectorateDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       }); 
     });
@@ -104,6 +106,7 @@ export class DirectorateDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       }); 
     });
