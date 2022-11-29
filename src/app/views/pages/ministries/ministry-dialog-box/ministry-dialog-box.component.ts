@@ -50,6 +50,7 @@ export class MinistryDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       });    
     });
@@ -71,6 +72,7 @@ export class MinistryDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       }); 
     });
@@ -89,6 +91,7 @@ export class MinistryDialogBoxComponent implements OnInit {
       Swal.fire({
         title: 'عذرا يوجد خطأ ..  ',
         timer: 1000,
+        text:err.error? err.error.message : '',
         showConfirmButton: false,
       }); 
     });
@@ -99,8 +102,6 @@ export class MinistryDialogBoxComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  ngOnInit(): void {
-    console.log(this.component1);
-  }
+  ngOnInit(): void {}
 
 }
