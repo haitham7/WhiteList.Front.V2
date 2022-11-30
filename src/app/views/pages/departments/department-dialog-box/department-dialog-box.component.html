@@ -1,0 +1,49 @@
+<app-departments #component1 hidden></app-departments>
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Add'">اضافة قسم جديد</span>
+        <span *ngIf="action == 'Update'">تعديل القسم </span>
+        <span *ngIf="action == 'Delete'">حذف القسم </span>
+    </div>
+    <hr />
+    <div mat-dialog-content>
+        <div class="row mt-4 px-4" *ngIf="action != 'Delete'; else elseTemplate">
+            <div class="col-12 mt-3">
+                <mat-form-field class="text-start w-100" >
+                    <mat-label>اختر الوزارة</mat-label>
+                    <mat-select [(ngModel)]="ministryOfDirectorate" [disabled]="department.directorate" (selectionChange)="getDirectorateByMinistries($event)">
+                        <mat-option *ngFor="let card of ministries" class="text-start" [value]="card.id">{{card.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <form [formGroup]="modelForm">
+            <div class="col-12  mt-3">
+                <mat-form-field class="text-start w-100" >
+                    <mat-label>اختر الدائرة</mat-label>
+                    <mat-select formControlName="directorateId"  [(ngModel)]="directorateOfDepartment" [disabled]="department.directorate">
+                        <mat-option *ngFor="let card of directorates" class="text-start" [value]="card.id">{{card.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-12  mt-3">
+                <mat-form-field class="text-start w-100">
+                    <input placeholder="ادخل اسم القسم" matInput formControlName="name" [(ngModel)]="department.name">
+                </mat-form-field>
+            </div>
+        </form>
+            
+        </div>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{department.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
+          (click)="addDepartment()">اضافة</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updateDepartment(department.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deleteDepartment(department.id)">حذف</button>
+    </div>

@@ -37,7 +37,7 @@ export const MENU: MenuItem[] = [
   {
     title: 'الاقسام',
     icon: 'layout',
-    path: '/depatments/all',
+    path: '/Depatments/all',
     type: 'link'
   },
   {

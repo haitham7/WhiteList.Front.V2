@@ -63,6 +63,10 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('./views/pages/departments/departments.module').then(m => m.DepartmentsModule),
+  },
+  {
+    path: '',
     loadChildren: () => import('./views/pages/authentication/authentication.module').then(m => m.AuthenticationModule),
   },
   {
