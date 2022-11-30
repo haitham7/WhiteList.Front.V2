@@ -10,7 +10,7 @@
             <div class="col-12 mt-3">
                 <mat-form-field class="text-start w-100" >
                     <mat-label>اختر الوزارة</mat-label>
-                    <mat-select [(ngModel)]="ministryOfDirectorate" [disabled]="department.directorate" (selectionChange)="getDirectorateByMinistries($event)">
+                    <mat-select [(ngModel)]="ministryOfDirectorate" [disabled]="department.directorate" (selectionChange)="getDirectorateByMinistries($event.value)">
                         <mat-option *ngFor="let card of ministries" class="text-start" [value]="card.id">{{card.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>

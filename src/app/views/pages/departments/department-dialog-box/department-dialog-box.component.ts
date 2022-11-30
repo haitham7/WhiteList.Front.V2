@@ -57,9 +57,7 @@ export class DepartmentDialogBoxComponent implements OnInit {
       console.log(err.message);
     });
   } 
-  getDirectorateByMinistries(e){
-    console.log(e.value)
-    const ministryId=e.value;
+  getDirectorateByMinistries(ministryId){
     this.directorateService.getDirectorateByMinistry(ministryId).subscribe((res: any) => {   
       this.directorates = res.data;
     }, (err: any) =>{
