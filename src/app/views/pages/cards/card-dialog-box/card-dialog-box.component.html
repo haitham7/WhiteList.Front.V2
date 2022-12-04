@@ -1,6 +1,5 @@
 <app-cards #component1 hidden></app-cards>
     <div mat-dialog-title>
-        <span *ngIf="action == 'Add'">اضافة بطاقة جديدة</span>
         <span *ngIf="action == 'Update'">تعديل معلومات البطاقة </span>
         <span *ngIf="action == 'Delete'">حذف البطاقة </span>
     </div>
@@ -56,7 +55,7 @@
                 </div>
                 <div class="col-6">
                     <mat-form-field  class="text-start w-100" style="margin-top:-12px ;">
-                        <input class="w-75 mt-3" matInput [matDatepicker]="picker" readonly>
+                        <input class="w-75 mt-3" matInput formControlName="payDate" [matDatepicker]="picker" readonly>
                         <mat-hint class="text-end">MM/DD/YYYY ادخل تاريخ الدفع بالصيغة</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-end">
                             <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
@@ -74,8 +73,6 @@
     <div mat-dialog-actions>
         <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
             color="warn">الغاء</button>
-        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
-          (click)="addCard()">اضافة</button>
         <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
             (click)="updateCard(card.id)">تعديل</button>
         <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"

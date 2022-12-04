@@ -76,6 +76,8 @@ export class CardDialogBoxComponent implements OnInit {
   }
 
   updateCard(id:any){
+    console.log(id);
+    console.log(this.modelForm);
     if(this.modelForm.status=="INVALID"){
       return;
     }
