@@ -3,6 +3,8 @@ import { CardComponent } from './../cards.component';
 import { Component, Inject, Optional, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EnumService } from '../../../../core/services/api/enum.service';
+
 declare var require: any;
 const Swal = require('sweetalert2');
 
@@ -22,6 +24,11 @@ export class CardDialogBoxComponent implements OnInit {
   card:any;
   ministries: any;
   directorates: any;
+  pensionCardType:any;
+  gender:any;
+  jobInfoType:any;
+  cardStatus:any;
+  paymentDestination:any;
   public modelForm: FormGroup | any;
   @ViewChild("component1") component1: CardComponent;
 
@@ -29,6 +36,7 @@ export class CardDialogBoxComponent implements OnInit {
     public dialogRef: MatDialogRef<CardDialogBoxComponent>,
     private cardService:CardService,
     private fb: FormBuilder,
+    private enumService:EnumService,
     //@Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: CardData) {
     this.card = {...data};
@@ -111,6 +119,23 @@ export class CardDialogBoxComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close();
   }
-  ngOnInit(): void {}
+  getEnum(enumName){
+    this.enumService.enum(enumName).subscribe((res: any) => {   
+      enumName== 'PensionCardType'? this.pensionCardType=res.data :'';
+      enumName== 'Gender'? this.gender=res.data :'';
+      enumName== 'JobInfoType'? this.jobInfoType=res.data :'';
+      enumName== 'CardStatus'? this.cardStatus=res.data :'';
+      enumName== 'PaymentDestination'? this.paymentDestination=res.data :'';
+    }, (err: any) =>{
+      console.log(err.message);
+    });
+  } 
+  ngOnInit(): void {
+    this.getEnum('PensionCardType');
+     this.getEnum('Gender');
+     this.getEnum('JobInfoType');
+     this.getEnum('CardStatus');
+     this.getEnum('PaymentDestination');
+  }
 
 }
