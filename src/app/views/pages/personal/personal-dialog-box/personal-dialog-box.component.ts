@@ -2,6 +2,7 @@ import { BlackListService } from './../../../../core/services/api/blackList.serv
 import { PersonalService } from './../../../../core/services/api/personal.service';
 import { DepartmentService } from './../../../../core/services/api/departments.service';
 import { DirectoratesService } from './../../../../core/services/api/directorates.service';
+import { EnumService } from './../../../../core/services/api/enum.service';
 import { MinistriesService } from '../../../../core/services/api/ministries.service';
 import { Component, Inject, Optional, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,6 +30,8 @@ export class PersonalDialogBoxComponent implements OnInit {
   directorates: any;
   departments:any;
   BlackList:any;
+  gender:any;
+  jobInfoType:any;
   public modelForm: FormGroup | any;
   @ViewChild("component1") component1: PersonalComponent;
 
@@ -39,6 +42,7 @@ export class PersonalDialogBoxComponent implements OnInit {
     private directoratesService: DirectoratesService,
     private ministriesService: MinistriesService,
     private blackListService:BlackListService,
+    private enumService:EnumService,
     private fb: FormBuilder,
     //@Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: personsData) {
@@ -166,10 +170,21 @@ export class PersonalDialogBoxComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close();
   }
-
+  getEnum(enumName){
+    this.enumService.enum(enumName).subscribe((res: any) => {   
+      enumName== 'Gender'? this.gender=res.data :'';
+       enumName== 'JobInfoType'? this.jobInfoType=res.data :'';
+      // enumName== 'CardStatus'? this.cardStatus=res.data :'';
+      // enumName== 'PaymentDestination'? this.paymentDestination=res.data :'';
+    }, (err: any) =>{
+      console.log(err.message);
+    });
+  } 
   ngOnInit(): void {   
     this.getAllMinistries();
     this.getAllBlackList();
+    this.getEnum('Gender');
+    this.getEnum('JobInfoType');
   }
 
 }

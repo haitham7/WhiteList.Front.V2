@@ -18,8 +18,7 @@
                         <mat-form-field class="text-start w-100" >
                             <mat-label>حدد الجنس</mat-label>
                             <mat-select formControlName="gender"  [(ngModel)]="personal.gender">
-                                <mat-option class="text-start" [value]="1">ذكر</mat-option>
-                                <mat-option class="text-start" [value]="2">انثى</mat-option>
+                                <mat-option *ngFor="let g of gender" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -42,8 +41,7 @@
                         <mat-form-field class="text-start w-100" >
                             <mat-label>المعلومات الوظيفية</mat-label>
                             <mat-select formControlName="jobInfoType"  [(ngModel)]="personal.jobInfoType">
-                                <mat-option class="text-start" [value]="2">موظف</mat-option>
-                                <mat-option class="text-start" [value]="1">متقاعد</mat-option>
+                                <mat-option *ngFor="let g of jobInfoType" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>

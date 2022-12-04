@@ -26,6 +26,10 @@ export class AddNewPersonalComponent implements OnInit {
   departments:any;
   BlackList:any;
   pensionCardType:any;
+  jobInfoType:any;
+  gender:any;
+  cardStatus:any;
+  paymentDestination:any;
   personalId:any;
   public cardFormGroup: FormGroup | any;
   public personalFormGroup: FormGroup | any;
@@ -72,8 +76,11 @@ export class AddNewPersonalComponent implements OnInit {
 
   getEnum(enumName){
     this.enumService.enum(enumName).subscribe((res: any) => {   
-      console.log(res.data);
-      this.pensionCardType=res.data;
+      enumName== 'PensionCardType'? this.pensionCardType=res.data :'';
+      enumName== 'Gender'? this.gender=res.data :'';
+      enumName== 'JobInfoType'? this.jobInfoType=res.data :'';
+      enumName== 'CardStatus'? this.cardStatus=res.data :'';
+      enumName== 'PaymentDestination'? this.paymentDestination=res.data :'';
     }, (err: any) =>{
       console.log(err.message);
     });
@@ -161,7 +168,11 @@ export class AddNewPersonalComponent implements OnInit {
   ngOnInit(): void {   
     this.getAllMinistries();
     this.getAllBlackList();
-    // this.getEnum('pensionCardType');
+     this.getEnum('PensionCardType');
+     this.getEnum('Gender');
+     this.getEnum('JobInfoType');
+     this.getEnum('CardStatus');
+     this.getEnum('PaymentDestination');
   }
 
 }

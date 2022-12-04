@@ -26,8 +26,7 @@
                                 <mat-form-field class="text-start w-100" >
                                     <mat-label>حدد الجنس</mat-label>
                                     <mat-select formControlName="gender">
-                                        <mat-option class="text-start" [value]="1">ذكر</mat-option>
-                                        <mat-option class="text-start" [value]="2">انثى</mat-option>
+                                        <mat-option *ngFor="let g of gender" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -50,8 +49,7 @@
                                 <mat-form-field class="text-start w-100" >
                                     <mat-label>المعلومات الوظيفية</mat-label>
                                     <mat-select formControlName="jobInfoType">
-                                        <mat-option class="text-start" [value]="2">موظف</mat-option>
-                                        <mat-option class="text-start" [value]="1">متقاعد</mat-option>
+                                        <mat-option *ngFor="let g of jobInfoType" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -117,7 +115,7 @@
                                 <mat-form-field class="text-start w-100" >
                                     <mat-label> اختر نوع البطاقة</mat-label>
                                     <mat-select formControlName="pensionCardType">
-                                        <mat-option class="text-start" [value]="1">اصيل</mat-option>
+                                        <mat-option *ngFor="let g of pensionCardType" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -125,7 +123,7 @@
                                 <mat-form-field class="text-start w-100" >
                                     <mat-label> اختر حالة البطاقة</mat-label>
                                     <mat-select formControlName="cardStatus">
-                                        <mat-option class="text-start" [value]="1">prod</mat-option>
+                                        <mat-option *ngFor="let g of cardStatus" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -133,7 +131,7 @@
                                 <mat-form-field class="text-start w-100" >
                                     <mat-label> اختر جهة الدفع</mat-label>
                                     <mat-select formControlName="paymentDestination">
-                                        <mat-option class="text-start" [value]="1">رافدين</mat-option>
+                                        <mat-option *ngFor="let g of paymentDestination" class="text-start" [value]="g.key">{{g.value}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
