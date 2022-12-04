@@ -1,0 +1,177 @@
+  
+<br/>
+
+<div class="row mt-4">
+    <div class="col-12 col-sm-12">
+        <div class="card product-sales-main">
+            <div class="card-header border-bottom">
+                <h1 class="card-title mb-0">اضافة زبون جديد</h1>
+            </div>
+            <div class="card-body">
+                <mat-stepper
+                class="example-stepper"
+                dir="rtl"
+                #stepper
+                [orientation]="(stepperOrientation | async)!">
+                <mat-step class="float-start" [stepControl]="personalFormGroup" label="اضافة معلومات الزبون">
+                    <form [formGroup]="personalFormGroup">
+                    <section>
+                        <div class="row mt-4 px-4" dir="rtl">
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل اسم الزبون الكامل" matInput formControlName="fullName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>حدد الجنس</mat-label>
+                                    <mat-select formControlName="gender">
+                                        <mat-option class="text-start" [value]="1">ذكر</mat-option>
+                                        <mat-option class="text-start" [value]="2">انثى</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل اسم الام الكامل" matInput formControlName="motherFullName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 ">
+                                <mat-form-field class="text-start w-100" style="margin-top:-12px ;">
+                                    <input class="w-75 mt-3" matInput formControlName="birthDate" [matDatepicker]="picker1" readonly>
+                                    <mat-hint class="text-end">ادخل تاريخ الميلاد بالصيغة MM/DD/YYYY </mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker1" class="float-end">
+                                        <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
+                                    </mat-datepicker-toggle>
+                                <mat-datepicker dir="ltr"  class="text-start" #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>المعلومات الوظيفية</mat-label>
+                                    <mat-select formControlName="jobInfoType">
+                                        <mat-option class="text-start" [value]="2">موظف</mat-option>
+                                        <mat-option class="text-start" [value]="1">متقاعد</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="الرقم الحكومي" matInput formControlName="governmentNumber">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>اختر الوزارة</mat-label>
+                                    <mat-select formControlName="ministryId" (selectionChange)="getDirectorateByMinistries($event.value)">
+                                        <mat-option *ngFor="let ministry of ministries" class="text-start" [value]="ministry.id">{{ministry.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>اختر الدائرة</mat-label>
+                                    <mat-select formControlName="directorateId" (selectionChange)="getDepartmentByDirectorate($event.value)">
+                                        <mat-option *ngFor="let directorate of directorates" class="text-start" [value]="directorate.id">{{directorate.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>اختر القسم</mat-label>
+                                    <mat-select formControlName="departmentId">
+                                        <mat-option *ngFor="let department of departments" class="text-start" [value]="department.id">{{department.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label>القائمة السوداء</mat-label>
+                                    <mat-select formControlName="blackListId">
+                                        <mat-option *ngFor="let blackPerson of BlackList" class="text-start" [value]="blackPerson.id">{{blackPerson.value}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="mt-5">
+                        <button  class="btn btn-primary mt-2 float-end" (click)='nextToCardInfo(stepper)' mat-button>الى اضافة معلومات البطاقة <i class="fa fa-arrow-left"></i></button>
+                    </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="cardFormGroup" label="اضافة بطاقة للزبون">
+                    <form [formGroup]="cardFormGroup">
+                    <section>
+                        <div class="row mt-4 px-4" dir="rtl">
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل رقم البطاقة" matInput formControlName="cardNumber">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل ibn " matInput formControlName="ibn">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label> اختر نوع البطاقة</mat-label>
+                                    <mat-select formControlName="pensionCardType">
+                                        <mat-option class="text-start" [value]="1">اصيل</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label> اختر حالة البطاقة</mat-label>
+                                    <mat-select formControlName="cardStatus">
+                                        <mat-option class="text-start" [value]="1">prod</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100" >
+                                    <mat-label> اختر جهة الدفع</mat-label>
+                                    <mat-select formControlName="paymentDestination">
+                                        <mat-option class="text-start" [value]="1">رافدين</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3" hidden>
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل معرف الشخص " matInput formControlName="personalId">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6  mt-3">
+                                <mat-form-field class="text-start w-100">
+                                    <input placeholder="ادخل الراتب " inputmode="numeric"
+                                    pattern="[0-9]*" digitOnly matInput formControlName="salary">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field  class="text-start w-100" style="margin-top:-12px ;">
+                                    <input class="w-75 mt-3" formControlName="payDate" matInput [matDatepicker]="picker" readonly>
+                                    <mat-hint class="text-end">MM/DD/YYYY ادخل تاريخ الدفع بالصيغة</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-end">
+                                        <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
+                                      </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="mt-5">
+                        <button class="btn btn-danger mt-2 me-2" mat-button matStepperPrevious> <i class="fa fa-arrow-right"></i> الرجوع الى معلومات الزبون</button>
+                        <button class="btn btn-primary mt-2 me-2 float-end" (click)="next(stepper)" mat-button>اتمام عملية اضافة البطاقة <i class="fa fa-arrow-left"></i></button>
+                    </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>تم </ng-template>
+                    <p>تم اضافة الزبون وانشاء بطاقة خاصة به</p>
+                </mat-step>
+                </mat-stepper>           
+            </div>
+        </div>
+    </div>
+</div>

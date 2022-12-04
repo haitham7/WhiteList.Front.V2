@@ -19,7 +19,7 @@ export const MENU: MenuItem[] = [
   {
     title: 'الزبائن',
     icon: 'users',
-    path: '/customers/all',
+    path: '/Customers/all',
     type: 'link'
   },
   {
@@ -43,7 +43,7 @@ export const MENU: MenuItem[] = [
   {
     title: 'البطاقات',
     icon: 'file-text',
-    path: '/cards/all',
+    path: '/Cards/all',
     type: 'link'
   },
   {

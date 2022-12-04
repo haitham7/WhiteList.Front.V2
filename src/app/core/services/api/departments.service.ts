@@ -12,6 +12,10 @@ export class DepartmentService {
     return this.http.get(this.baseUrl + '/api/Department/All/'+pageNum).pipe();
   }
 
+  getDepartmentByDirectorate(directorateId){
+    return this.http.get(this.baseUrl + '/api/Department/GetByMinistry?directorateId='+directorateId).pipe();
+  }
+
   addNewDepartment(body:any) {
     return this.http.post(this.baseUrl + '/api/Department/Create',body).pipe();
   }

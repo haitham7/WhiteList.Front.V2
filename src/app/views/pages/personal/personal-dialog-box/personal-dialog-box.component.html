@@ -1,0 +1,103 @@
+<app-personal #component1 hidden></app-personal>
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Add'">اضافة زبون جديد</span>
+        <span *ngIf="action == 'Update'">تعديل معلومات الزبون </span>
+        <span *ngIf="action == 'Delete'">حذف الزبون </span>
+    </div>
+    <hr />
+
+    <div mat-dialog-content>
+        <form [formGroup]="modelForm">
+            <div class="row mt-4 px-4" dir="rtl" *ngIf="action != 'Delete'; else elseTemplate">
+                    <div class="col-6  mt-3">
+                        <mat-form-field class="text-start w-100">
+                            <input placeholder="ادخل اسم الزبون الكامل" matInput formControlName="fullName" [(ngModel)]="personal.fullName">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6  mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>حدد الجنس</mat-label>
+                            <mat-select formControlName="gender"  [(ngModel)]="personal.gender">
+                                <mat-option class="text-start" [value]="1">ذكر</mat-option>
+                                <mat-option class="text-start" [value]="2">انثى</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6  mt-3">
+                        <mat-form-field class="text-start w-100">
+                            <input placeholder="ادخل اسم الام الكامل" matInput formControlName="motherFullName" [(ngModel)]="personal.motherFullName">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 ">
+                        <mat-form-field class="text-start w-100" style="margin-top:-12px ;">
+                            <input class="w-75 mt-3" matInput formControlName="birthDate" [(ngModel)]="personal.birthDate" [matDatepicker]="picker" readonly>
+                            <mat-hint class="text-end">ادخل تاريخ الميلاد بالصيغة MM/DD/YYYY </mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-end">
+                                <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
+                            </mat-datepicker-toggle>
+                        <mat-datepicker dir="ltr"  class="text-start" #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6  mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>المعلومات الوظيفية</mat-label>
+                            <mat-select formControlName="jobInfoType"  [(ngModel)]="personal.jobInfoType">
+                                <mat-option class="text-start" [value]="2">موظف</mat-option>
+                                <mat-option class="text-start" [value]="1">متقاعد</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6  mt-3">
+                        <mat-form-field class="text-start w-100">
+                            <input placeholder="الرقم الحكومي" matInput formControlName="governmentNumber" [(ngModel)]="personal.governmentNumber">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>اختر الوزارة</mat-label>
+                            <mat-select [(ngModel)]="personalMinistry" formControlName="ministryId" (selectionChange)="getDirectorateByMinistries($event.value)">
+                                <mat-option *ngFor="let ministry of ministries" class="text-start" [value]="ministry.id">{{ministry.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>اختر الدائرة</mat-label>
+                            <mat-select   [(ngModel)]="personalDirectorate" formControlName="directorateId" (selectionChange)="getDepartmentByDirectorate($event.value)">
+                                <mat-option *ngFor="let directorate of directorates" class="text-start" [value]="directorate.id">{{directorate.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>اختر القسم</mat-label>
+                            <mat-select   [(ngModel)]="personalDepartment" formControlName="departmentId">
+                                <mat-option *ngFor="let department of departments" class="text-start" [value]="department.id">{{department.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <mat-form-field class="text-start w-100" >
+                            <mat-label>القائمة السوداء</mat-label>
+                            <mat-select   [(ngModel)]="personal.blackListId" formControlName="blackListId">
+                                <mat-option *ngFor="let blackPerson of BlackList" class="text-start" [value]="blackPerson.id">{{blackPerson.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+            </div>
+        </form>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{personal.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
+          (click)="addPersonal()">اضافة</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updatePersonal(personal.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deletePersonal(personal.id)">حذف</button>
+    </div>

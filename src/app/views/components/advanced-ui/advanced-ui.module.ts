@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdvancedUiRoutingModule } from './advanced-ui-routing.module';
 import { AccordionsComponent } from './accordions/accordions.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { CardsComponent } from './cards/cards.component';
+import { CardssComponent } from './cards/cards.component';
 import { CountersComponent } from './counters/counters.component';
 import { ModalsComponent } from './modals/modals.component';
 import { SweetAlertsComponent } from './sweet-alerts/sweet-alerts.component';
@@ -34,7 +34,7 @@ import { faGithub, faGithubAlt, faTwitter } from '@fortawesome/free-brands-svg-i
   declarations: [
     AccordionsComponent,
     CarouselComponent,
-    CardsComponent,
+    CardssComponent,
     CountersComponent,
     ModalsComponent,
     SweetAlertsComponent,

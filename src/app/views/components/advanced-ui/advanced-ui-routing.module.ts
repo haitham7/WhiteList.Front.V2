@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccordionsComponent } from './accordions/accordions.component';
-import { CardsComponent } from './cards/cards.component';
+import { CardssComponent } from './cards/cards.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { CountersComponent } from './counters/counters.component';
 import { FileAttachmentsComponent } from './file-attachments/file-attachments.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
     path:'', children: [
       {path: 'accordion', component: AccordionsComponent},
       {path: 'carousel', component: CarouselComponent},
-      {path: 'cards', component: CardsComponent},
+      {path: 'cards', component: CardssComponent},
       {path: 'counters', component: CountersComponent},
       {path: 'modals', component: ModalsComponent},
       {path: 'timeline', component: TimelineComponent},

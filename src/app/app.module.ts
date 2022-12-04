@@ -27,6 +27,11 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginator } from './core/help/customRTLPaginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatStepperModule} from '@angular/material/stepper';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,12 +51,15 @@ import { CustomPaginator } from './core/help/customRTLPaginator';
     NgxSpinnerModule,
     MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule,
     FormsModule,ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatStepperModule
 
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: CustomPaginator() },
-
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

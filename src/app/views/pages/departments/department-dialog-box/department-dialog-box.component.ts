@@ -1,6 +1,4 @@
-import { departments } from './../departments.component';
 import { DirectoratesService } from './../../../../core/services/api/directorates.service';
-import { latLng } from 'leaflet';
 import { DepartmentService } from './../../../../core/services/api/departments.service';
 import { Component, Inject, Optional, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

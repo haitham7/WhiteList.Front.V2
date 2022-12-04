@@ -1,0 +1,82 @@
+<app-cards #component1 hidden></app-cards>
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Add'">اضافة بطاقة جديدة</span>
+        <span *ngIf="action == 'Update'">تعديل معلومات البطاقة </span>
+        <span *ngIf="action == 'Delete'">حذف البطاقة </span>
+    </div>
+    <hr />
+    <div mat-dialog-content>
+        <form [formGroup]="modelForm">
+            <div class="row mt-4 px-4" dir="rtl" *ngIf="action != 'Delete'; else elseTemplate">
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل رقم البطاقة" matInput formControlName="cardNumber" [(ngModel)]="card.cardNumber">
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل ibn " matInput formControlName="ibn" [(ngModel)]="card.ibn">
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر نوع البطاقة</mat-label>
+                        <mat-select formControlName="pensionCardType"  [(ngModel)]="card.pensionCardType">
+                            <mat-option class="text-start" [value]="1">اصيل</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر حالة البطاقة</mat-label>
+                        <mat-select formControlName="cardStatus"  [(ngModel)]="card.cardStatus">
+                            <mat-option class="text-start" [value]="1">prod</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر جهة الدفع</mat-label>
+                        <mat-select formControlName="paymentDestination"  [(ngModel)]="card.paymentDestination">
+                            <mat-option class="text-start" [value]="1">رافدين</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل معرف الشخص " matInput formControlName="personalId" [(ngModel)]="card.personalId">
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input #salary placeholder="ادخل الراتب " inputmode="numeric"
+                        pattern="[0-9]*" digitOnly matInput formControlName="salary" [(ngModel)]="card.salary">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field  class="text-start w-100" style="margin-top:-12px ;">
+                        <input class="w-75 mt-3" matInput [matDatepicker]="picker" readonly>
+                        <mat-hint class="text-end">MM/DD/YYYY ادخل تاريخ الدفع بالصيغة</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-end">
+                            <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
+                          </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{card.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
+          (click)="addCard()">اضافة</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updateCard(card.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deleteCard(card.id)">حذف</button>
+    </div>

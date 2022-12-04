@@ -67,6 +67,14 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('./views/pages/cards/cards.module').then(m => m.CardsModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./views/pages/personal/personal.module').then(m => m.PersonalModule),
+  },
+  {
+    path: '',
     loadChildren: () => import('./views/pages/authentication/authentication.module').then(m => m.AuthenticationModule),
   },
   {
