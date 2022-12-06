@@ -48,8 +48,6 @@ export class CardDialogBoxComponent implements OnInit {
       cardStatus:['', [Validators.required]],
       paymentDestination:['', [Validators.required]],
       personalId:['', [Validators.required]],
-      salary:['', [Validators.required]],
-      payDate:['', [Validators.required]],
     });
   }
 

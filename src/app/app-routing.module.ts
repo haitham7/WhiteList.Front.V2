@@ -56,22 +56,27 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./views/pages/ministries/ministries.module').then(m => m.MinistriesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     loadChildren: () => import('./views/pages/directorates/directorates.module').then(m => m.DirectoratesModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     loadChildren: () => import('./views/pages/departments/departments.module').then(m => m.DepartmentsModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     loadChildren: () => import('./views/pages/cards/cards.module').then(m => m.CardsModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     loadChildren: () => import('./views/pages/personal/personal.module').then(m => m.PersonalModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',

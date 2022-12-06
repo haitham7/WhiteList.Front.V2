@@ -6,6 +6,7 @@
     <hr />
     <div mat-dialog-content>
         <form [formGroup]="modelForm">
+            {{card | json}}
             <div class="row mt-4 px-4" dir="rtl" *ngIf="action != 'Delete'; else elseTemplate">
                 <div class="col-6  mt-3">
                     <mat-form-field class="text-start w-100">
@@ -42,25 +43,9 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-6  mt-3">
+                <div class="col-6  mt-3" hidden>
                     <mat-form-field class="text-start w-100">
-                        <input placeholder="ادخل معرف الشخص " matInput formControlName="personalId" [(ngModel)]="card.personalId">
-                    </mat-form-field>
-                </div>
-                <div class="col-6  mt-3">
-                    <mat-form-field class="text-start w-100">
-                        <input #salary placeholder="ادخل الراتب " inputmode="numeric"
-                        pattern="[0-9]*" digitOnly matInput formControlName="salary" [(ngModel)]="card.salary">
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field  class="text-start w-100" style="margin-top:-12px ;">
-                        <input class="w-75 mt-3" matInput formControlName="payDate" [matDatepicker]="picker" readonly>
-                        <mat-hint class="text-end">MM/DD/YYYY ادخل تاريخ الدفع بالصيغة</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-end">
-                            <mat-icon matDatepickerToggleIcon><i class="fa fa-calendar"></i></mat-icon>
-                          </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                        <input placeholder="ادخل معرف الشخص " matInput formControlName="personalId" [(ngModel)]="card.personal.id" readonly>
                     </mat-form-field>
                 </div>
             </div>
