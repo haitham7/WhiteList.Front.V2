@@ -18,6 +18,7 @@ const Swal = require('sweetalert2');
 @Component({
   selector: 'app-add-new-personal',
   templateUrl: './add-new-personal.component.html',
+  styleUrls: ['./add-new-personal.component.scss'],
 })
 export class AddNewPersonalComponent implements OnInit {
   stepperOrientation: Observable<StepperOrientation>;
