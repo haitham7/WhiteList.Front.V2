@@ -1,24 +1,22 @@
 import { Injectable } from "@angular/core";
-import { NgxSpinnerService } from "ngx-spinner";
+import { Subject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
 export class BusyService {
   busyRequestCount = 0;
-  constructor(private ngxSpinnerService: NgxSpinnerService) {}
+  isLoading = new Subject<boolean>();
+  constructor() {}
   busy() {
     this.busyRequestCount++;
-    this.ngxSpinnerService.show(undefined, {
-      type: "ball-scale-multiple",
-      bdColor: "rgba(0, 0, 0, .6)",
-      color: "white",
-    });
+    this.isLoading.next(true);
+ }
+
+ idle() {
+  this.busyRequestCount--;
+  if (this.busyRequestCount <= 0) {
+    this.busyRequestCount = 0;
+    this.isLoading.next(false);
   }
-  idle() {
-    this.busyRequestCount--;
-    if (this.busyRequestCount <= 0) {
-      this.busyRequestCount = 0;
-      this.ngxSpinnerService.hide();
-    }
-  }
+ }
 }

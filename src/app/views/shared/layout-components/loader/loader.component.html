@@ -1,5 +1,5 @@
 <!---Global-loader-->
-<div *ngIf="isSpinnerVisible">
+<div *ngIf="isSpinnerVisible | async">
     <div id="global-loader">
         <img src="assets/images/loader.svg" class="loader-img" alt="loader">
     </div>
