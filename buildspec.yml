@@ -1,9 +1,11 @@
 version: 0.2
 phases:
   install:
+    runtime-versions:
+      nodejs: 10
     commands:
-      - echo install process started 
-      - npm install -g @angular/cli@11.2.2 npm@latest
+      - echo Installing angular cli...
+      - npm install -g @angular/cli
   build:    
     commands:
       - echo build process started now
