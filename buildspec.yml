@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo install process started
+      - npm install 
+      - npm install -g @vue/cli
+  build:    
+    commands:
+      - echo build process started now
+      - npm run build
+artifacts:
+  files:
+    - dist/**/*
+    - appspec.yml
+    - nginx_reload.sh
