@@ -4,11 +4,11 @@ phases:
     commands:
       - echo install process started
       - npm install 
-      - npm install -g @vue/cli
+      - npm install -g @angular/cli
   build:    
     commands:
       - echo build process started now
-      - npm run build
+      - ng build
 artifacts:
   files:
     - dist/**/*
