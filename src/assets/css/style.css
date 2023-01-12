@@ -1,4 +1,14 @@
 @charset "UTF-8";
+
+@font-face {
+    font-family: "Cairo";
+    src: url(../fonts/Cairo-Regular.ttf) format("truetype");
+    /* font-display: swap; */
+  }
+  body,
+table {
+  font-family: "Cairo" !important;
+}
 /*------------------------------------------------------------------
 [Master Stylesheet]
 
@@ -146,7 +156,7 @@ License        :   Licensed under ThemeForest License
 */
 /* ######## FONT ######## */
 /*-------- Bootstrap Framework -------*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 
 /* ######## BOOTSTRAP ######## */
 /*Gradient variables*/
@@ -217,7 +227,7 @@ section {
 
 body {
     margin: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: "Cairo";
     font-size: 0.8375rem;
     font-weight: 400;
     line-height: 1.5;

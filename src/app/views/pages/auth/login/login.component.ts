@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.authService.login(this.loginForm.value).subscribe(() => {
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/Customers/all');
       localStorage.setItem('isLoggedin', 'true');
     }, (err: any) =>{
       console.log(err.message);
