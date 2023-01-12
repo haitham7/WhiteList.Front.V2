@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/FrontEnd/
+  - source: nginx_reload.sh
+    destination: nginx_reload.sh
+file_exists_behavior: OVERWRITE
+hooks:
+  ApplicationStart:
+    - location: nginx_reload.sh
+      timeout: 30
