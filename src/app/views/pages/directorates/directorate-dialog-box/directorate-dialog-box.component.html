@@ -1,0 +1,41 @@
+<app-directorates #component1 hidden></app-directorates>
+<form [formGroup]="modelForm">
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Add'">اضافة دائرة جديدة</span>
+        <span *ngIf="action == 'Update'">تعديل الدائرة </span>
+        <span *ngIf="action == 'Delete'">حذف الدائرة </span>
+    </div>
+    <hr />
+    <div mat-dialog-content>
+        <div class="row mt-4" *ngIf="action != 'Delete'; else elseTemplate">
+            <div class="col-6">
+                <mat-form-field class="text-start w-100" >
+                    <mat-label>اختر الوزارة</mat-label>
+                    <mat-select formControlName="ministryId"  [(ngModel)]="ministryOfDirectorate" [disabled]="directorate.ministry">
+                        <mat-option *ngFor="let card of ministries" class="text-start" [value]="card.id">{{card.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="text-start w-100">
+                    <input placeholder="ادخل الاسم" matInput formControlName="name" [(ngModel)]="directorate.name">
+                </mat-form-field>
+            </div>
+            
+        </div>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{directorate.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
+          (click)="addDirectorate()">اضافة</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updateDirectorate(directorate.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deleteDirectorate(directorate.id)">حذف</button>
+    </div>
+</form>

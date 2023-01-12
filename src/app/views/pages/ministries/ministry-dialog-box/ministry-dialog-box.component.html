@@ -1,0 +1,30 @@
+<app-ministries #component1 hidden></app-ministries>
+<form [formGroup]="modelForm">
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Add'">اضافة وزارة جديدة</span>
+        <span *ngIf="action == 'Update'">تعديل اسم الوزارة </span>
+        <span *ngIf="action == 'Delete'">حذف الوزارة </span>
+    </div>
+    <hr />
+    <div mat-dialog-content>
+        <div class="mt-4">
+            <mat-form-field class="text-start mt-4 w-100" *ngIf="action != 'Delete'; else elseTemplate">
+                <input placeholder="ادخل الاسم" matInput formControlName="name" [(ngModel)]="ministry.name">
+            </mat-form-field>
+        </div>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{ministry.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Add'"
+          (click)="addMinistry()">اضافة</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updateMinistry(ministry.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deleteMinistry(ministry.id)">حذف</button>
+    </div>
+</form>

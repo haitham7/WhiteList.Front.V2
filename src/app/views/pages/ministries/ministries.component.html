@@ -1,0 +1,66 @@
+<br/>
+
+<div class="row mt-4">
+    <div class="col-12 col-sm-12">
+        <div class="card product-sales-main">
+            <div class="card-header border-bottom">
+                <h1 class="card-title mb-0">الوزارات</h1>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">     
+                    <mat-form-field appearance="standard" class="mat-typography text-start float-start">
+                        <mat-label>ابحث هنا...</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="اسم الوزارة" #input>
+                    </mat-form-field>    
+                    <div class="mt-5">
+                        <button class="btn btn-outline-primary border float-end "  (click)="openDialog('Add',{})">اضافة وزارة جديدة</button>
+                    </div>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 table-bordered" mat-table [dataSource]="dataSource" matSort>
+
+                    <ng-container matColumnDef="name">
+                        <th class="text-start" mat-header-cell *matHeaderCellDef mat-sort-header myTable> الوزارة </th>
+                        <td mat-cell *matCellDef="let row" class="sorting_1">
+                            <div class="d-flex align-items-center">
+                                <div class="user-details ms-2">
+                                    <h6 class="mb-0">{{row.name}}</h6>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Action">
+                        <th class="text-start" mat-header-cell *matHeaderCellDef> الاجرائات </th>
+                        <td mat-cell *matCellDef="let row">
+                            <div class="d-flex align-items-stretch">
+                                <button class="btn btn-sm btn-outline-primary border me-2" (click)="openDialog('Update',row)">
+                                    تعديل<i class="fe fe-edit-2 ms-2"></i>
+                                </button>
+                                <button (click)="openDialog('Delete',row)" class="btn btn-sm btn-outline-secondary border me-2">
+                                    حذف
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="16">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path
+                                        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator dir="rtl" class="text-start" [length]="length" [pageSize]="pageSize" (page)="handlePage($event)" [pageSizeOptions]="[10]"></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

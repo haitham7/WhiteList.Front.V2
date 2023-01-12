@@ -1,0 +1,65 @@
+<app-cards #component1 hidden></app-cards>
+    <div mat-dialog-title>
+        <span *ngIf="action == 'Update'">تعديل معلومات البطاقة </span>
+        <span *ngIf="action == 'Delete'">حذف البطاقة </span>
+    </div>
+    <hr />
+    <div mat-dialog-content>
+        <form [formGroup]="modelForm">
+            {{card | json}}
+            <div class="row mt-4 px-4" dir="rtl" *ngIf="action != 'Delete'; else elseTemplate">
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل رقم البطاقة" matInput formControlName="cardNumber" [(ngModel)]="card.cardNumber">
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل ibn " matInput formControlName="ibn" [(ngModel)]="card.ibn">
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر نوع البطاقة</mat-label>
+                        <mat-select formControlName="pensionCardType"  [(ngModel)]="card.pensionCardType">
+                            <mat-option *ngFor="let g of pensionCardType" class="text-start" [value]="g.key">{{g.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر حالة البطاقة</mat-label>
+                        <mat-select formControlName="cardStatus"  [(ngModel)]="card.cardStatus">
+                            <mat-option *ngFor="let status of cardStatus" class="text-start" [value]="status.key">{{status.value}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3">
+                    <mat-form-field class="text-start w-100" >
+                        <mat-label> اختر جهة الدفع</mat-label>
+                        <mat-select formControlName="paymentDestination"  [(ngModel)]="card.paymentDestination">
+                            <mat-option *ngFor="let dest of paymentDestination" class="text-start" [value]="dest.key">{{dest.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6  mt-3" hidden>
+                    <mat-form-field class="text-start w-100">
+                        <input placeholder="ادخل معرف الشخص " matInput formControlName="personalId" [(ngModel)]="card.personal.id" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <ng-template #elseTemplate>
+            <span class="text-start"> هل انت متأكد من حذف <b>{{card.name}}</b> ؟ </span>
+        </ng-template>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-outline-danger border" (click)="closeDialog()" mat-flat-button
+            color="warn">الغاء</button>
+        <button mat-button type="submit" class="btn btn-outline-primary border me-2" *ngIf="action == 'Update'"
+            (click)="updateCard(card.id)">تعديل</button>
+        <button mat-button type="submit" class="btn btn-outline-warning border me-2" *ngIf="action == 'Delete'"
+            (click)="deleteCard(card.id)">حذف</button>
+    </div>
