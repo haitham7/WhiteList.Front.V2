@@ -15,7 +15,7 @@ import { switcher } from './views/shared/routes/switchers';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/Customers/all',
     pathMatch: 'full'
   },
   // // Vertical layout
